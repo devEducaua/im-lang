@@ -1,4 +1,3 @@
-
 enum TokenType {
     text,           // 0
     title,          // 1
@@ -9,7 +8,8 @@ enum TokenType {
     h5,             // 6
     h6,             // 7
     todo,           // 8
-    todoChecked     // 9
+    todoChecked,    // 9
+    bullet,         // 10
 }
 
 export interface Token {
@@ -22,14 +22,25 @@ export function tokenize(src: string): Token[] {
 
     return lines.map(l => {
         if (l.startsWith("- ") && l.endsWith(" -")) return { type: TokenType.title, value: l.slice(2, -2)}
+
         else if (l.startsWith("- ") && !l.endsWith(" -")) return { type: TokenType.h1, value: l.slice(2) }
+
         else if (l.startsWith("-- ")) return { type: TokenType.h2, value: l.slice(3) }
+
         else if (l.startsWith("--- ")) return { type: TokenType.h3, value: l.slice(4) }
+
         else if (l.startsWith("---- ")) return { type: TokenType.h4, value: l.slice(5) }
+
         else if (l.startsWith("----- ")) return { type: TokenType.h5, value: l.slice(6) }
+
         else if (l.startsWith("------ ")) return { type: TokenType.h6, value: l.slice(7) }
+
         else if (l.startsWith("[ ]")) return { type: TokenType.todo, value: l.slice(3) }
+
         else if (l.startsWith("[x]")) return { type: TokenType.todoChecked, value: l.slice(3) }
+
+        else if (l.startsWith("* "))  return{ type: TokenType.bullet, value: l.slice(2) }
+
         return { type: TokenType.text, value: l }
     })
 }
