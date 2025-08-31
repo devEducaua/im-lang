@@ -4,12 +4,21 @@ Indu-Markup or Improved Markup language is a markup language similar to Markdown
 ```im
 - Title Page -
 
-- heading1
+- IM lang
 normal text.
+*italic text*.
+**bold text**.
+***italic and bold text***.
 
--- heading2
-[ ] todo list
-[x] todo list
+-- todo-lists
+[ ] todo item
+[x] todo item
+
+-- tables
+id | extension
+1  | im
+2  | md
+3  | gmi
 ```
 
 IM is still in development.
